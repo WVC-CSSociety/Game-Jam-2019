@@ -45,9 +45,16 @@ public class PlayerControler : MonoBehaviour
             }
         }
 
-        myController.Move(new Vector3(xValue * speed * deltaTime, verticalVelocity, zValue * speed * deltaTime));
+        //myController.Move(new Vector3(xValue * speed * deltaTime, verticalVelocity, zValue * speed * deltaTime));
 
-        Debug.Log("rotateValue: " + rotateValue);
+        var forwardMovementVector = myController.transform.forward * zValue * speed * deltaTime;
+        var horizontalMovementVector = myController.transform.right * xValue * speed * deltaTime;
+
+        var rawMovementVector = forwardMovementVector + horizontalMovementVector;
+        rawMovementVector.y += verticalVelocity;
+
+        myController.Move(rawMovementVector);
+
         myController.transform.Rotate(new Vector3(0, rotateValue * rotationSpeed, 0));
 
         //if (verticalVelocity > 0)
