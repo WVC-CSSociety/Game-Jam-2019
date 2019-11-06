@@ -12,6 +12,8 @@ public class PlayerControler : MonoBehaviour
     public float jumpIntensity = 1;
     public float gravity = 50;
 
+    public float tooLow = -1000;
+
     [HideInInspector]
     public float verticalVelocity;
 
@@ -22,6 +24,7 @@ public class PlayerControler : MonoBehaviour
     {
         if (myController == null) myController = gameObject.GetComponent<CharacterController>();
         if (myController == null) myController = gameObject.AddComponent<CharacterController>();
+        myController.gameObject.tag = "Player";
     }
 
     // Update is called once per frame
@@ -57,10 +60,10 @@ public class PlayerControler : MonoBehaviour
 
         myController.transform.Rotate(new Vector3(0, rotateValue * rotationSpeed, 0));
 
-        //if (verticalVelocity > 0)
+        if (verticalVelocity > 0)
         {
             verticalVelocity -= gravity * deltaTime;
-            //if (verticalVelocity < 0) verticalVelocity = 0;
+            if (verticalVelocity < 0) verticalVelocity = 0;
         }
 
         //Ground detection
@@ -76,5 +79,22 @@ public class PlayerControler : MonoBehaviour
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * 1000, Color.white);
             Debug.Log("Did not Hit");
         }
+
+        if(myController.transform.position.y < tooLow)
+        {
+            Respawn();
+        }
+    }
+
+    public void Respawn()
+    {
+        var foundSpawn = SpawnPoint.GetSpawnPoint("SpawnPointDefault");
+        Respawn(foundSpawn);
+    }
+
+    public void Respawn(SpawnPoint spawnPoint)
+    {
+        myController.transform.position = spawnPoint.transform.position;
+        myController.transform.rotation = spawnPoint.transform.rotation;
     }
 }
