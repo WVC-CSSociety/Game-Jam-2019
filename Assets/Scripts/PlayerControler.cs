@@ -94,6 +94,11 @@ public class PlayerControler : MonoBehaviour
 
     public void Respawn(SpawnPoint spawnPoint)
     {
+        if(spawnPoint == null)
+        {
+            Debug.LogError("Attempted to respawn to null spawnPoint");
+            return;
+        }
         myController.transform.position = spawnPoint.transform.position;
         myController.transform.rotation = spawnPoint.transform.rotation;
     }
