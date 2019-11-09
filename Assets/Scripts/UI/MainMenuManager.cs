@@ -12,24 +12,19 @@ public class MainMenuManager : MonoBehaviour
 
     public void LoadGameProcedural3D()
     {
-        GameManager.LoadGame(GameManager.GameModes.Procedural3D);
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Procedural");
     }
     public void LoadGameStory3D()
     {
-        GameManager.LoadGame(GameManager.GameModes.Story3D);
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Story3D");
     }
     public void LoadGameStory2D()
     {
-        GameManager.LoadGame(GameManager.GameModes.Story2D);
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Story2D");
     }
     public void LoadGameSample()
     {
-        GameManager.LoadGame(GameManager.GameModes.Sample);
-    }
-
-    public void LoadGame(GameManager.GameModes gameMode)
-    {
-        GameManager.LoadGame(gameMode);
+        UnityEngine.SceneManagement.SceneManager.LoadScene("SampleScene");
     }
 
     public void QuitGame()
