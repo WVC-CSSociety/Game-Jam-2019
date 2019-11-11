@@ -60,7 +60,7 @@ public class PlayerControler : MonoBehaviour
 
         myController.transform.Rotate(new Vector3(0, rotateValue * rotationSpeed, 0));
 
-        //if (verticalVelocity > 0)
+        if (!myController.isGrounded)
         {
             verticalVelocity -= gravity * deltaTime;
             //if (verticalVelocity < 0) verticalVelocity = 0;

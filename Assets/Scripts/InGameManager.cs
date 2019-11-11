@@ -5,9 +5,17 @@ using UnityEngine;
 
 public class InGameManager : MonoBehaviour
 {
+    public static InGameManager instance;
+
     public Generator terrainGenerator;
 
     public GameObject playerPrefab;
+    public GameObject terrainPrefab;
+    public GameObject powerUpPrefab;
+
+    public Material groundMaterial;
+
+    public float pickupChance = 5;
 
     public int startingRing = 3;
     public int startingRingCount = 3;
@@ -17,6 +25,7 @@ public class InGameManager : MonoBehaviour
 
     private void Awake()
     {
+        instance = this;
         terrainGenerator.GenerateSpawn();
         playerControler = GeneratePlayer();
     }
@@ -26,25 +35,21 @@ public class InGameManager : MonoBehaviour
     {
         StartCoroutine(RespawnPlayer());
 
+        DateTime startGenerateTime = DateTime.Now;
         //Generate default rings
 
-        for(int i = startingRing; i <= startingRing + startingRingCount; i++)
+        for (int i = startingRing; i <= startingRing + startingRingCount; i++)
         {
             terrainGenerator.GenerateRing(i);
         }
+        Debug.Log("Generate time: " + (DateTime.Now - startGenerateTime).ToString());
+
     }
 
     IEnumerator RespawnPlayer()
     {
         yield return null;
         playerControler.Respawn();
-        
-        //*
-        DateTime start = DateTime.Now;
-        yield return new WaitForSeconds(60f);
-        Debug.Log("Run time: " + (DateTime.Now - start).ToString());
-        playerControler.Respawn();
-        //*/
     }
 
     // Update is called once per frame

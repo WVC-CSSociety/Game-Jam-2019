@@ -13,6 +13,11 @@ public abstract class Generator : ScriptableObject
         InGameManager inGameManager = FindInGameManager();
 
         GameObject ground = GameObject.CreatePrimitive(PrimitiveType.Plane);
+        if (inGameManager.groundMaterial != null)
+        {
+            var renderer = ground.GetComponent<Renderer>();
+            renderer.material = inGameManager.groundMaterial;
+        }
 
         GameObject defaultSpawn = new GameObject("SpawnPointDefault");
         defaultSpawn.AddComponent<SpawnPoint>();

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 433e9877da09ae3438835f75fbe2e567, type: 3}
   m_Name: BasicGenerator
   m_EditorClassIdentifier: 
-  ringWidth: 5
-  generateFlat: 1
+  ringWidth: 8
+  generateFlat: 0
