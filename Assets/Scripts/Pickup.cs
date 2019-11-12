@@ -8,6 +8,7 @@ public class Pickup : MonoBehaviour
     public Collider myTrigger;
 
     public float bonusJumpIntensity = 0.5f;
+    public float bonusSpeed = 1;
 
     public UnityEvent onPickup;
 
@@ -26,6 +27,7 @@ public class Pickup : MonoBehaviour
             var playerControler = other.transform.root.GetComponent<PlayerControler>();
 
             playerControler.jumpIntensity += bonusJumpIntensity;
+            playerControler.speed += bonusSpeed;
 
             onPickup.Invoke();
         }

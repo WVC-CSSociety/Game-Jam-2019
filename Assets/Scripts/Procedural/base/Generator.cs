@@ -4,8 +4,6 @@ using UnityEngine;
 
 public abstract class Generator : ScriptableObject
 {
-    public int ringWidth = 3;
-
     List<List<GameObject>> pillarObjects = new List<List<GameObject>>();
 
     public virtual void GenerateSpawn()
@@ -23,33 +21,41 @@ public abstract class Generator : ScriptableObject
         defaultSpawn.AddComponent<SpawnPoint>();
         defaultSpawn.transform.Translate(0,1,0);
     }
-    public virtual void GenerateRing(int ringID)
+    public virtual void GenerateRing(int ringID, int chunkWidth, ChunkManager chunkManager)
     {
         //Generate top
         for(int x = -(ringID+1); x <= (ringID+1); x++)
         {
-            GeneratePillar(x, (ringID+1));
+            int newY = (ringID + 1);
+            var newObject = GeneratePillar(x, newY, chunkWidth);
+            if(chunkManager != null) chunkManager.AddObjectToChunk(newObject, x, newY);
         }
 
         //Generate bottom
         for (int x = -(ringID+1); x <= ringID + 1; x++)
         {
-            GeneratePillar(x, -(ringID +1));
+            int newY = -(ringID + 1);
+            var newObject = GeneratePillar(x, newY, chunkWidth);
+            if (chunkManager != null) chunkManager.AddObjectToChunk(newObject, x, newY);
         }
 
         //Generate left
         for (int y = -ringID; y <= ringID; y++)
         {
-            GeneratePillar((ringID+1), y);
+            int newX = (ringID + 1);
+            var newObject = GeneratePillar(newX, y, chunkWidth);
+            if (chunkManager != null) chunkManager.AddObjectToChunk(newObject, newX, y);
         }
 
         //Generate right
         for (int y = -ringID; y <= ringID; y++)
         {
-            GeneratePillar(-(ringID + 1), y);
+            int newX = -(ringID + 1);
+            var newObject = GeneratePillar(newX, y, chunkWidth);
+            if (chunkManager != null) chunkManager.AddObjectToChunk(newObject, newX, y);
         }
     }
-    public abstract GameObject GeneratePillar(int x, int y);
+    public abstract List<GameObject> GeneratePillar(int x, int y, int width);
 
     public InGameManager FindInGameManager()
     {
