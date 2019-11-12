@@ -416,7 +416,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6679697883740d343917d539d866c10e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  terrainGenerator: {fileID: 11400000, guid: 1dbb3afcb1a63474ab4d0634ecc62012, type: 2}
+  terrainGenerator: {fileID: 11400000, guid: 3f256df36ed0a6b4d9d973d9a8c4c3f3, type: 2}
   farClippingPlane: 200
   playerPrefab: {fileID: 2650173379830889601, guid: 0281cba60df6e4a4288971eea037e0c3,
     type: 3}
@@ -429,7 +429,7 @@ MonoBehaviour:
   startingRingCount: 60
   ringWidth: 5
   generateProceduraly: 1
-  loadDistance: 0
+  loadDistance: 5
 --- !u!4 &1561878789
 Transform:
   m_ObjectHideFlags: 0
