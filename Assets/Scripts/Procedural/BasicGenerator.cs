@@ -17,7 +17,7 @@ public class BasicGenerator : Generator
         else newPillar = GameObject.CreatePrimitive(PrimitiveType.Cube);
         newPillar.name = "Pillar(" + x.ToString() + ", " + y.ToString() + ")";
         newPillar.transform.position = new Vector3(x*width, 0, y*width);
-        float height = CreatePillarHeight(x,y);        
+        float height = CreatePillarHeight(x,y);
         if (generateFlat) height = 1;
         newPillar.transform.localScale = new Vector3(width, height, width);
 
